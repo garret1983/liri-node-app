@@ -74,72 +74,79 @@ function showTweets() {
         }
     })
 }
-function spotifySong(song) {
-    spotify.search({ type: 'track', query: song }, function (error, data) {
+//spotify info 
+function spotifySong(songData) {
+    spotify.search({ type: 'Artist', query: songData }, function (error, artist, data) {
         if (!error) {
-            console.log(song)
-            for (var i = 0; i < data.song.length; i++) {
-                var songData = data.song[i] 
+            console.log(error)
 
-                //artist/song info 
-                console.log("Artist: " + songData.artist[0].name);
-                console.log("Song: " + songData.name);
-                conosole.log("Preview URL: " + songData.preview_url);
-                console.log("Album " + songData.album.name);
+            for (var i = 0; i < artist.sonData; i++) {
+                var songData = artist.song[i]
+
+                console.log("Artist " + "Song " + preview_url + album)
+
+                //         //artist/song info 
+                // console.log("Artist: " + songData.Artist);
+                // console.log("Song: " + songData);
+                // console.log("Preview URL: " + songData.preview_url);
+                // console.log("Album " + songData.album);
                 console.log("-----------");
             }
         } else {
             console.log(error);
         }
-    });
-}
+    })
 
-function omdbData(movie) {
-    var omdbURL = 'http://www.omdbapi.com/?t=' + movie + '&plot=short&tomatoes=true';
 
-    request(omdbURL, function (error, response, body) {
-        if (!error && response.statusCodecode === 200) {
-            var body = JSON.parse(body);
 
-            //logs movie info
-            console.log("Title: " + body.Title);
-            console.log("Relase Year: " + body.Year);
-            console.log("IMdB Rating: " + body.imdbRating);
-            console.log("Country: " + body.Country);
-            console.log("Language: " + body.Language);
-            console.log("Plot: " + body.Plot);
-            console.log("Actors: " + body.Actors);
-            console.log("Rotten Tomatoes Rating: " + body.tomatoRating);
+    function omdbData(movie) {
+        var omdbURL = 'http://www.omdbapi.com/?t=' + movie + '&plot=short&tomatoes=true';
 
-            fs.appendFile('log.txt', "title: " + body.Title);
-            fs.appendFile('log.txt', "Release Year: " + body.Year);
-            fs.appendFile('log.txt', "IMdB Rating: " + body.imdbRating);
-            fs.appendFile('log.txt', "Country: " + body.Country);
-            fs.appendFile('log.txt', "Language: " + body.Language);
-            fs.appendFile('log.txt', "Plot: " + body.Plot);
-            fs.appendFile('log.txt', "Actors: " + body.Actors);
-            fs.appendFile('log.txt', "Rotten Tomatoes Rating: " + body.tomatoRating);
+        request(omdbURL, function (error, response, body) {
+            if (!error && response.statusCodecode === 200) {
+                var body = JSON.parse(body);
 
-        } else {
-            console.log(error)
-        }
-        if (movie === "Mr. Nobody") {
-            console.log("---------");
-            console.log("{If you havnt watched 'Mr. Nobody,' then you should: http://www.imdb.com/title/tt0485947/");
-            console.log("Its on Netflix!");
+                //logs movie info
+                console.log("Title: " + body.Title);
+                console.log("Relase Year: " + body.Year);
+                console.log("IMdB Rating: " + body.imdbRating);
+                console.log("Country: " + body.Country);
+                console.log("Language: " + body.Language);
+                console.log("Plot: " + body.Plot);
+                console.log("Actors: " + body.Actors);
+                console.log("Rotten Tomatoes Rating: " + body.tomatoRating);
 
-            fs.appendFile('log.txt', "----------");
-            fs.appendFile('log.txt', "If you havnt watched 'Mr. Nobody, ' then you should: http://www.imdb.com/title/tt0485947/");
-            fs.appendFile('log.txt', "Its on Netflix!");
-        }
-    });
-}
+                fs.appendFile('log.txt', "title: " + body.Title);
+                fs.appendFile('log.txt', "Release Year: " + body.Year);
+                fs.appendFile('log.txt', "IMdB Rating: " + body.imdbRating);
+                fs.appendFile('log.txt', "Country: " + body.Country);
+                fs.appendFile('log.txt', "Language: " + body.Language);
+                fs.appendFile('log.txt', "Plot: " + body.Plot);
+                fs.appendFile('log.txt', "Actors: " + body.Actors);
+                fs.appendFile('log.txt', "Rotten Tomatoes Rating: " + body.tomatoRating);
 
-function doThing() {
-    fs.readFile('random.txt', "utf8", function (error, data) {
-        var txt = data.split(',');
+            } else {
+                console.log(error)
+            }
+            if (movie === "Mr. Nobody") {
+                console.log("---------");
+                console.log("{If you havnt watched 'Mr. Nobody,' then you should: http://www.imdb.com/title/tt0485947/");
+                console.log("Its on Netflix!");
 
-        // spotifySong(txt[1]);
-    });
+                fs.appendFile('log.txt', "----------");
+                fs.appendFile('log.txt', "If you havnt watched 'Mr. Nobody, ' then you should: http://www.imdb.com/title/tt0485947/");
+                fs.appendFile('log.txt', "Its on Netflix!");
+            }
+        });
+    }
+
+    function doThing() {
+        fs.readFile('random.txt', "utf8", function (error, data) {
+            var txt = data.split(',');
+            
+
+        });
+    }
+
 }
 
